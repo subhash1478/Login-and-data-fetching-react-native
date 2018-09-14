@@ -6,6 +6,7 @@ import Post from './src/components/Post'
 
 import {ActivityIndicator, AsyncStorage} from 'react-native';
 class Routes extends Component {
+  
   constructor() {
     super();
     this.state = { hasToken: false, isLoaded: false };
@@ -19,7 +20,7 @@ class Routes extends Component {
      
     if (!this.state.isLoaded) {
       return (
-        <ActivityIndicator />
+        <ActivityIndicator size="large" color="#0000ff" />
         )
       } else {
         return (

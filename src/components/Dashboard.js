@@ -11,8 +11,11 @@ class Dashboard extends React.Component {
     };
   }
   componentDidMount() {
+
     getCategory().then((result) => {
       let resultdata=result.data
+      setTimeout(() => this.setState({ refreshing: false}));
+
       this.setState({ names:resultdata })
     }).catch((err) => {
     });
@@ -22,7 +25,8 @@ class Dashboard extends React.Component {
 
   refresh = () => {
     this.setState({ refreshing: true, names: [] });
-    setTimeout(() => this.setState({ refreshing: true}), 1500);
+    setTimeout(() => this.setState({ refreshing: true}));
+    this.componentDidMount()
   };
 
 
@@ -35,7 +39,7 @@ class Dashboard extends React.Component {
   renderItem = ({ item }) => {
     return (
       <View style={styles.flatview}>
-      <TouchableOpacity onPress={() => Actions.Post()}>
+      <TouchableOpacity onPress={() => Actions.Post({id: item._id})}>
       <Image style={{width: 50, height: 50}}
       source={{uri: item.image}} />
       <Text style={styles.name}>{item.title}</Text>
